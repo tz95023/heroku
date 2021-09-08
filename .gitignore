@@ -2,8 +2,6 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/flask-app/.vs
-/flask-app/flask-app/.user
-/flask-app/flask-app/flask-app.pyproj
-/flask-app/flask-app/flask-app.pyproj.user
-/flask-app/flask-app.sln
+*.pyproj
+*.user
+*.sln

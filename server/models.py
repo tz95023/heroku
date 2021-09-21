@@ -1,8 +1,10 @@
-# project/server/models.py
+# server/models.py
 
+from server.database import db
+from server.encryption import bcrypt
 import datetime
-
-from server import app, db, bcrypt
+# from server import app
+# from server.database import db
 
 
 class User(db.Model):
@@ -15,10 +17,11 @@ class User(db.Model):
     registered_on = db.Column(db.DateTime, nullable=False)
     admin = db.Column(db.Boolean, nullable=False, default=False)
 
-    def __init__(self, email, password, admin=False):
+    def __init__(self, email, password, rounds, admin=False):
         self.email = email
         self.password = bcrypt.generate_password_hash(
-            password, app.config.get('BCRYPT_LOG_ROUNDS')
+            password, rounds
         ).decode()
         self.registered_on = datetime.datetime.now()
         self.admin = admin
+        # rounds = app.config.get('BCRYPT_LOG_ROUNDS')

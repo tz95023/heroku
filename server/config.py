@@ -1,6 +1,5 @@
 # server/config.py
 
-
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 postgres_local_base = 'postgresql://postgres:953515@localhost:5433/'

@@ -8,6 +8,8 @@
 *.sln
 *.suo
 *.pyc
+*.env
+*.flaskenv
 /.vs
 /env
 /venv

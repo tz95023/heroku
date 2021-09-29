@@ -46,4 +46,8 @@ migration.init_app(app)
 def index():
     return render_template('index.html')
 
+@app.route('/app_settings')
+def app_settings():
+    return render_template('app_settings.html', database_uri=app.config['SQLALCHEMY_DATABASE_URI'])
+
 

@@ -26,7 +26,7 @@ class RemoteDevelopmentConfig(BaseConfig):
     """Remote Development configuration."""
     DEBUG = True
     BCRYPT_LOG_ROUNDS = 4
-    SQLALCHEMY_DATABASE_URI = postgres_remote_base + remote_database_name
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
 
 class TestingConfig(BaseConfig):
     """Testing configuration."""

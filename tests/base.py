@@ -3,7 +3,8 @@
 
 from flask_testing import TestCase
 
-from server import app, db
+from server import app
+from server.database import db
 
 
 class BaseTestCase(TestCase):

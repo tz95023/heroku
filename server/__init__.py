@@ -7,23 +7,34 @@ import server.database
 import server.encryption
 import server.commands
 import server.migration
+import server.config
+import sys
 from flask import Flask, render_template
 # from flask_sqlalchemy import SQLAlchemy
 # from flask_bcrypt import Bcrypt
 # from flask_migrate import Migrate
 from flask_cors import CORS
+from dotenv import load_dotenv
 
-
+#print(os.getenv("SECRET_KEY"))
 
 app = Flask(__name__)
 CORS(app)
 
-app_settings = os.getenv(
-    'APP_SETTINGS',
-    'server.config.DevelopmentConfig'
-)
-app.config.from_object(app_settings)
+load_dotenv()
 
+flask_app = os.getenv('FLASK_APP')
+if flask_app is None:
+    flask_app = os.environ.get('FLASK_APP')
+app_settings = os.getenv('APP_SETTINGS')
+if app_settings is None:
+    app_settings = os.environ.get('APP_SETTINGS')
+
+app.config.from_object(app_settings)
+server.config.current_BCRYPT_LOG_ROUNDS = app.config['BCRYPT_LOG_ROUNDS']
+#print(app.config["SECRET_KEY"])
+
+#print(server.config.current_BCRYPT_LOG_ROUNDS)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:953515@localhost:5433/da-flask-app'
 #app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

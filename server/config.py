@@ -7,6 +7,8 @@ postgres_local_base = 'postgresql://postgres:953515@localhost:5433/'
 postgres_remote_base = 'postgresql://qhtjvehionrpvj:62d2995d3b607c0260d84eb37736dbec8d5b3e8ab4a3c4bcd358ee4b92288336@ec2-52-208-221-89.eu-west-1.compute.amazonaws.com:5432/'
 database_name = 'da-flask-app'
 remote_database_name = 'd4qs27m374c0qh'
+current_BCRYPT_LOG_ROUNDS = 13
+current_SECRET_KEY = ''
 
 
 class BaseConfig:

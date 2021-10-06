@@ -47,7 +47,8 @@ commands.init_app(app)
 migration.init_app(app)
 #migrate = Migrate(app, db)
 
-
+from server.auth.views import auth_blueprint
+app.register_blueprint(auth_blueprint)
 # @app.cli.command("create-db")
 #def create_db():
 #    db.create_all

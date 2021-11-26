@@ -1,8 +1,4 @@
 ﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-
 
 *.pyproj
 *.user
@@ -12,7 +8,10 @@
 *.env
 *.flaskenv
 /.vs
+/.vscode
 /env
 /venv
 /__pycache__
-/da-flask-app/venv
+/da-flask-app/client
+/node_modules
+/coverage

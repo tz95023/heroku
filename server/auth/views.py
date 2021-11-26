@@ -1,7 +1,7 @@
 # server/auth/views.py
 
-from flask import Blueprint, request, make_response, jsonify
-from flask.views import MethodView
+from flask import Blueprint, request, make_response, jsonify, render_template
+from flask.views import View, MethodView
 
 from server.database import db
 from server.encryption import bcrypt
@@ -179,30 +179,34 @@ class LogoutAPI(MethodView):
             return make_response(jsonify(responseObject)), 403
 
 
+class UsersAPI(View):
+     def dispatch_request(self):
+        users = User.query.all()
+        return render_template('users.html', objects=users)
+
+
 # define the API resources
 registration_view = RegisterAPI.as_view('register_api')
 login_view = LoginAPI.as_view('login_api')
 user_view = UserAPI.as_view('user_api')
 logout_view = LogoutAPI.as_view('logout_api')
+users_view = UsersAPI.as_view('show_users')
 
 # add Rules for API Endpoints
-auth_blueprint.add_url_rule(
-    '/auth/register',
-    view_func=registration_view,
-    methods=['POST']
-)
-auth_blueprint.add_url_rule(
-    '/auth/login',
-    view_func=login_view,
-    methods=['POST']
-)
-auth_blueprint.add_url_rule(
-    '/auth/status',
-    view_func=user_view,
-    methods=['GET']
-)
-auth_blueprint.add_url_rule(
-    '/auth/logout',
-    view_func=logout_view,
-    methods=['POST']
-)
+auth_blueprint.add_url_rule('/auth/register', view_func=registration_view, methods=['POST'])
+auth_blueprint.add_url_rule('/auth/login', view_func=login_view, methods=['POST'])
+auth_blueprint.add_url_rule('/auth/status', view_func=user_view, methods=['GET'])
+auth_blueprint.add_url_rule('/auth/logout', view_func=logout_view, methods=['POST'])
+auth_blueprint.add_url_rule('/auth/users', view_func=UsersAPI.as_view('show_users'), methods=['GET'])
+
+#@auth.route('/auth/login')
+#def login():
+#    return render_template('login.html')
+
+@auth_blueprint.route('/auth/register')
+def register():
+    return render_template('register.html')
+
+@auth_blueprint.route('/auth/login')
+def login():
+    return render_template('login.html')

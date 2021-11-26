@@ -2,6 +2,8 @@
 
 
 import os
+
+from werkzeug import datastructures
 # import click
 import server.database
 import server.encryption
@@ -9,6 +11,7 @@ import server.commands
 import server.migration
 import server.config
 import sys
+import datetime
 from flask import Flask, render_template
 # from flask_sqlalchemy import SQLAlchemy
 # from flask_bcrypt import Bcrypt
@@ -47,19 +50,30 @@ commands.init_app(app)
 migration.init_app(app)
 #migrate = Migrate(app, db)
 
+
 from server.auth.views import auth_blueprint
 app.register_blueprint(auth_blueprint)
+
+
+from server.main import main_blueprint
+app.register_blueprint(main_blueprint)
+
 # @app.cli.command("create-db")
 #def create_db():
 #    db.create_all
 
 # a simple page that renders a page
-@app.route('/')
-def index():
-    return render_template('index.html')
+#@app.route('/')
+#def index():
+#    return render_template('index.html')
 
-@app.route('/app_settings')
-def app_settings():
-    return render_template('app_settings.html', database_uri=app.config['SQLALCHEMY_DATABASE_URI'])
+# a simple page that renders a page
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+#@app.route('/app_settings')
+#def app_settings():
+#    return render_template('app_settings.html', database_uri=app.config['SQLALCHEMY_DATABASE_URI'])
 
 
